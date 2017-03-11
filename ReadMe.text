@@ -1,0 +1,57 @@
+Ryan Kortvelesy
+
+1. Purpose
+Reads in information about students, tas, and classes into a data structure, and
+performs commands that fetch certain data (commands that one might expect would 
+take a long time for the computer to run).
+
+2. How to Compile
+Use the included Makefile (type "make").
+
+3. How to Run
+./degrees studentslist.txt taslist.txt
+
+4. Commands
+ls: lists all of the students
+lc: lists all of the classes
+taed [taname]: lists all of the classes a person has taed
+roster [class]: lists the roster of a class
+paths [startingperson] [destinationperson]: lists all of the “paths” from one 
+					      person to another, where one degree 
+					      of separation from person1 to person2 
+					      would be person2 being in a class 
+					      that person1 has taed.
+shortestpath [startingperson] [destinationperson]: prints only the shortest path
+
+5. Files
+main(.h/.cpp):  Holds an instance of the people class, passes it information
+	         that it reads in from the files, and calls functions in the
+	         class based on commands from cin.
+people(.h/.cpp):Contains a trie of all the students and a linked list of all
+		 the classes. There are functions that read the information
+		 into the data structures, helper functions, and a function
+		 for each of the possible commands.
+course(.h/.cpp):Contains a trie of all the students in the roster for a
+		 particular course. There are functions to print the roster,
+		 add a student, searching recursively for a student (by
+		 calling the same function for classes that students in the
+		 roster have TAed), and enqueuing all the students in the
+		 roster for a breadth-first search.
+person(.h/.cpp):Contains csclass and persondata structs (which are just 
+		 temporary structs for passing information about people
+		 or classes between functions) and the person class. The
+		 person class contains a name, a boolean indicating whether
+		 or not it is a person (useful for traversing the trie), and
+		 functions to add a class that the person has TAed or list
+		 all of the classes that they TAed.
+
+
+6. Data Structure
+Tries (all people and rosters), Linked Lists (of pointers to courses, as list of courses in people.cpp), Dynamic Arrays (of pointers to courses, as array of 
+courses in each person), Hash Tables (to find the appropriate pointer in a trie),
+and Queues (of strings and person*s, for a breadth-first search).
+
+7. Algorithms
+Recursion, both to traverse trie and to do a depth-first search, going from
+students in a class to the courses they TA.
+Breadth-first searching, using a queue.
